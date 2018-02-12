@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <header>
+        <h1>Beer Off Flavors Hangman</h1>
+    </header>
+
+    <div id="empty-word-display">
+
+    </div>
+
+    <script type= "text/javascript">
+
+    // Create variable array with beer off flavor words
+      
+      var hangmanWordOptions = [ "butyric","mercaptan", "acetaldehyde", "diacytl", "oxidized", "light struck" ]
+
+    // Have computer randomly select word in array 
+
+      var computerWordChoice = hangmanWordOptions[Math.floor(Math.random() * hangmanWordOptions.length)];
+
+      
+    // Display selected word as with space for each letter in the word- e.g. "_ _ _ _ _ _ _"
+
+      document.write(computerWordChoice);
+      
+      document.write(computerWordChoice.length);
+    
+    
+    function DisplaySecretWord() {
+    var dashes = "";
+      for (var i = 0; i < computerWordChoice.length; i++){
+          if (computerWordChoice.charAt(i)== " ") {
+              dashes += " ";
+          } else {
+              dashes += " _";
+          }
+          console.log(dashes);
+    
+      }
+    }
+
+    DisplaySecretWord ();
+
+      
+
+    // document.getElementbyID("empty-word-display").innerHTML = dashes;
+    // }
+
+    // DisplaySecretWord ();
+      
+    // Have user start choosing letters
+      
+    //   document.onkeyup = function(event){
+    //     var userGuess = event.key;
+    //     console.log(userGuess)
+    // }
+
+
+        
+// put all this in a function? 
+        
+        
+    </script>
+    
+</body>
+</html>

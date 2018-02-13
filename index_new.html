@@ -20,21 +20,26 @@
 
     // Create variable array with beer off flavor words
       
-      var hangmanWordOptions = [ "butyric","mercaptan", "acetaldehyde", "diacytl", "oxidized", "light struck" ]
+    //   var hangmanWordOptions = [ "butyric","mercaptan", "acetaldehyde", "diacytl", "oxidized", "light struck" ]
 
     // Have computer randomly select word in array 
 
-      var computerWordChoice = hangmanWordOptions[Math.floor(Math.random() * hangmanWordOptions.length)];
+    //   var computerWordChoice = hangmanWordOptions[Math.floor(Math.random() * hangmanWordOptions.length)];
 
       
     // Display selected word as with space for each letter in the word- e.g. "_ _ _ _ _ _ _"
 
-      document.write(computerWordChoice);
+    //   document.write(computerWordChoice);
       
-      document.write(computerWordChoice.length);
+    //   document.write(computerWordChoice.length);
     
     
     function DisplaySecretWord() {
+    var hangmanWordOptions = [ "butyric","mercaptan", "acetaldehyde", "diacytl", "oxidized", "light struck" ]
+    
+    var computerWordChoice = hangmanWordOptions[Math.floor(Math.random() * hangmanWordOptions.length)];
+    console.log(computerWordChoice)
+    
     var dashes = "";
       for (var i = 0; i < computerWordChoice.length; i++){
           if (computerWordChoice.charAt(i)== " ") {
@@ -43,7 +48,9 @@
               dashes += " _";
           }
           console.log(dashes);
-    
+          var wordContainer = document.getElementById("empty-word-display");
+          console.log(wordContainer);
+          wordContainer.innerHTML = dashes;
       }
     }
 

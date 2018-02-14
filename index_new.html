@@ -14,49 +14,53 @@
     <header class="header">
         <h1>Hangman</h1>
         <h2>Category: Beer Off Flavors</h2>
-        <p>Use the alphabet below to guess the word. </p>
+        <p>Use your keyboard to guess the word. </p>
     </header>
 
     <div id="empty-word-display">
 
     </div>
 
-    <div id="letters">
+    <div id="guesses-remaining">
+            10 Guesses Remaining
+
+    </div>
+
+    <div id="letters-chosen">
 
 
     </div>
 
-    <div id="lives">
-        
+    <div id="word-definition">
+
     </div>
 
     <script type="text/javascript">
 
         // Create variable array with all letters in the alphabet
         var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-        
+
         // Create variable array with beer off flavor words
         var hangmanWordOptions = ["butyric", "mercaptan", "acetaldehyde", "diacytl", "oxidized", "light struck"]
 
         // Have computer randomly select word in array 
         var computerWordChoice = hangmanWordOptions[Math.floor(Math.random() * hangmanWordOptions.length)];
         
-        // create counter Lives variable with number of lives
-        var Lives = 10;
+        console.log(computerWordChoice);
+
+        // create counter variable with number of guesses remaining
+        var guesses = 10;
 
         //create variable to hide chosen word with dashed
         var dashes = "";
-
-        // create variable array for all the buttons
-        var buttons =[];
 
         // create variable array for all guessed letters
 
         var guessedLetters = [];
 
-        // var UserGuess = btn.innerText;
 
-        
+
+
 
         // Run function on Play Game Button Click
         // Display computer word Choice with empty dashes
@@ -68,40 +72,61 @@
                 } else {
                     dashes += "_ ";
                 }
-                console.log(dashes);
+                // console.log(dashes);
                 var wordContainer = document.getElementById("empty-word-display");
-                console.log(wordContainer);
+                // console.log(wordContainer);
                 wordContainer.innerHTML = dashes;
+
             }
         }
 
 
         DisplaySecretWord();
 
-        
-        function createLetters() {
-            var wrapper = document.getElementById('letters');
-            for (var i = 65; i < 91; i++) {
-                var btn = document.createElement('button');
-                btn.innerText = String.fromCharCode(i);
-                buttons.push(btn.innerText);
-                console.log(buttons.length)
-                btn.id = String.fromCharCode(i);
-                // btn.onclick = LetterGuess(i);
-                wrapper.appendChild(btn);
-            }
+        document.onkeyup = function(event) {
+            var userGuess = event.key;
+            console.log(userGuess);
+            // for (var i = 0; i < computerWordChoice.length; i++) {
+                // if (userGuess === computerWordChoice.charAt(i)) {
+                if (computerWordChoice.indexOf(userGuess)=== -1){
+                // also need to add userGuess letter to guessedLetterArray to make it unselectable
+                guesses--;
+                // if (guesses < 1) {
+                //     guessContainer.innerHTML = "Game Over";
+                // }
+                var guessContainer = document.getElementById("guesses-remaining");
+                guessContainer.innerHTML = guesses + " "  + "Guesses Remaining";
+                }
 
+               
+                
+                
+                else {
+                console.log("Yes- that letter is in the word");
+                }
+                // console.log(computerWordChoice.indexOf(userGuess));
+                // for (var i = 0; i < computerWordChoice.length; i++) {
+                //     if (computerWordChoice.charAt(i) === userGuess) {
+                //     dashes += userGuess;
+                //     var newWordContainer = document.getElementById("empty-word-display");
+                //     console.log(newWordContainer);
+                //     newWordContainer.innerHTML = dashes;
+                //     }
+                
+                // } 
         }
-
-        createLetters();
-
-
-        function LetterGuess() {
-            console.log("this works")
-        }
-
+                
+            
         
-        
+        // Remaining Steps
+
+        // 1. Play Again button to Reload Game
+        // 2. Create an array to store guessed letters 
+        // 3. Once word is completed show definition
+
+
+
+
         // var alphaBtn = document.getElementbyID('button');
         // console.log(AlphaBtn);
 
@@ -109,12 +134,12 @@
         // console.log(alphaButton);
 
         // function letterButtonClick() {
-            
+
         //     console.log(btn.innerText)
         //     if (btn. === computerWordChoice.indexOf) {
         //     console.log('awesome');
         //     }
-            
+
         // }
 
 
@@ -147,13 +172,13 @@
 //               if (fistChar === userguess ){
 //               console.log("YES...match);
 //           }
-              
+
 //               else {
 //                 console.log("nope-no match");
 //               }
 //           }
-        
-              
+
+
 
 //     // document.getElementbyID("empty-word-display").innerHTML = dashes;
 

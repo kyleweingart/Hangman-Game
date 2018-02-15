@@ -91,11 +91,14 @@
                 if (computerWordChoice.indexOf(userGuess)=== -1){
                 // also need to add userGuess letter to guessedLetterArray to make it unselectable
                 guesses--;
-                // if (guesses < 1) {
-                //     guessContainer.innerHTML = "Game Over";
-                // }
                 var guessContainer = document.getElementById("guesses-remaining");
                 guessContainer.innerHTML = guesses + " "  + "Guesses Remaining";
+                if (guesses < 1) {
+                    guessContainer.innerHTML = "Game Over";
+                    guesses = 10;
+                    
+                }
+                
                 }
 
                
@@ -103,17 +106,18 @@
                 
                 else {
                 console.log("Yes- that letter is in the word");
+                console.log(computerWordChoice.indexOf(userGuess));
                 }
-                // console.log(computerWordChoice.indexOf(userGuess));
-                // for (var i = 0; i < computerWordChoice.length; i++) {
-                //     if (computerWordChoice.charAt(i) === userGuess) {
-                //     dashes += userGuess;
-                //     var newWordContainer = document.getElementById("empty-word-display");
-                //     console.log(newWordContainer);
-                //     newWordContainer.innerHTML = dashes;
-                //     }
                 
-                // } 
+                for (var i = 0; i < computerWordChoice.length; i++) {
+                    if (computerWordChoice.charAt(i) === userGuess) {
+                    dashes += userGuess;
+                    var newWordContainer = document.getElementById("empty-word-display");
+                    console.log(newWordContainer);
+                    newWordContainer.innerHTML = dashes;
+                    }
+                
+                } 
         }
                 
             

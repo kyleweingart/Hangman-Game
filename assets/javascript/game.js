@@ -1,24 +1,100 @@
-// 1. Create an array that lists out all the potential word options for the Hangman game
+//  VARIABlES
+// =======================================================================================================
 
-    var hangmanWordOptions = [ "butyric","mercaptan", "acetaldehyde", "diacytl", "oxidized" ]
+// Create variable array with all letters in the alphabet
+//  var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-// 2. Have the computer randomly select a word in the array- this could be done by having user click a button "Start Game" or with instructions telling user to press a key to start
+// Create variable array with beer off flavor words
+var hangmanWordOptions = [
+  "butyric",
+  "mercaptan",
+  "acetaldehyde",
+  "diacytl",
+  "oxidized",
+  "metallic"
+];
 
-    var computerWordChoice = hangmanWordOptions[Math.floor(Math.random() * hangmanWordOptions.length)];
+// create variable to store random word choice
+var computerWordChoice;
 
-// 3. Have the randomly selected word display with an underscore for each letter, for example oxidized has 8 letters so it will be displayed as "_ _ _ _ _ _ _ _"
+// create array variable to store random word choice in order access array functions splice, join, etc.
+var computerWordChoiceArray = [];
 
-        // Need to find out which property of the variable stores the length of the word - it could be .length
+//create variable to hide chosen word with underscore placeholder
+var dashes = [];
 
-// 4. Get user input by having them select a letter- this could be done by having a button for each letter on the alpahbet displayed on the page or telling user to press a key to start
+// create counter variable with number of guesses remaining
+var guesses;
 
-    document.onkeyup = function(event){
-        var userGuess = event.key;
+//create variable to hide chosen word with underscore placeholder
+var dashes = [];
+
+// create variable array for all incorrectly guessed letters
+var wrongLetterGuess;
+
+// FUNCTIONS
+// ==========================================================================================================
+
+// Start New Game function: resets all variables and chooses new random word - stores placeholder dashes as
+// an array variable which allows split and join - i spent a lot of time storing the placeholder as a regular
+// variable and struggling with replacing it with selected letter using index of and string replace.
+// Difference between QuerySelector and GetElementByID?
+function newGame() {
+  guesses = 10;
+  wrongLetterGuess = [];
+  computerWordChoice =
+    hangmanWordOptions[Math.floor(Math.random() * hangmanWordOptions.length)];
+  computerWordChoiceArray = computerWordChoice.split("");
+  dashes = [];
+
+  for (var i = 0; i < computerWordChoiceArray.length; i++) {
+    dashes.push("_");
+    var dashesString = dashes.join(" ");
+    document.querySelector("#empty-word-display").innerHTML = dashesString;
+    document.querySelector("#guesses-remaining").innerHTML =
+      "Guesses Remaining: " + guesses;
+  }
+}
+
+// MAIN PROCESS
+// ============================================================================================================
+
+document.onkeyup = function(event) {
+  var userGuess = event.key;
+
+  for (var i = 0; i < computerWordChoiceArray.length; i++) {
+    if (userGuess === computerWordChoiceArray[i]) {
+      dashes[i] = userGuess;
     }
+  }
+  document.querySelector("#empty-word-display").innerHTML = dashes.join(" ");
 
-// 5. Compare user Guess letter to the computer word choice   - if letter in word ===true do this  else do something else   (band activity-what is your favorite band?)- this could all be stored in the function?
+  //   Why Dashes here? could it be something else?
+  // Add more logic here so same letter cant be picked 2 times
+  if (dashes.indexOf(userGuess) === -1) {
+    wrongLetterGuess.push(userGuess);
+    guesses--;
+  }
 
-// 6. Tally every incorrect letter guess - store result in a counter variable   var letterGuess = 0, put outside of function  letterguess++
+  document.querySelector("#letters-chosen").innerHTML =
+    "Letters Chosen: " + "<br />" + wrongLetterGuess;
+  document.querySelector("#guesses-remaining").innerHTML =
+    "Guesses Remaining: " + guesses;
+  if (guesses < 1) {
+    document.querySelector("#guesses-remaining").innerHTML = "Game Over";
+    //   newGame();
+  }
 
-// 7. Display result of every user input - if they win flash definiton of the off flavor  if they lose play again. 
+  if (dashes.join("") === computerWordChoice) {
+    document.querySelector("#guesses-remaining").innerHTML = "You Win!!!";
+    // anewGame();
+  }
+};
+newGame();
 
+// Remaining Steps
+
+// 1. Dont allow user to pick same letter more than 1 time- stop it from going into array and being counted as
+// chosen letter
+// 2. Once word is completed show definition
+// 3. Once game is over do not allow user input- disable keypress event

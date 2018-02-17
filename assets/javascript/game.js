@@ -90,20 +90,23 @@ document.onkeyup = function (event) {
   document.querySelector("#guesses-remaining").innerHTML =
     "Guesses Remaining: " + guesses;
   if (guesses < 1) {
-    document.querySelector("#guesses-remaining").innerHTML = "Game Over";
-    //   newGame();
+    document.querySelector("#guesses-remaining").innerHTML = "Game Over: Click reload to play again!";
+    document.onkeyup = function (event){
+    return false;
+    }
   }
 
   if (dashes.join("") === computerWordChoice) {
-    document.querySelector("#guesses-remaining").innerHTML = "You Win!!!";
-    // anewGame();
+    document.querySelector("#guesses-remaining").innerHTML = "You Win!!!: Click reload to play again!";
+    document.onkeyup = function (event){
+    return false;
+    }
   }
 };
 newGame();
 
 // Remaining Steps
 
-// 1. Dont allow user to pick same letter more than 1 time- stop it from going into array and being counted as
-// chosen letter
-// 2. Once word is completed show definition
-// 3. Once game is over do not allow user input- disable keypress event
+
+// 1. Once word is completed show definition
+

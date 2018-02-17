@@ -59,8 +59,17 @@ function newGame() {
 // MAIN PROCESS
 // ============================================================================================================
 
-document.onkeyup = function(event) {
+document.onkeyup = function (event) {
   var userGuess = event.key;
+
+  // new code to not allow same letter to be chosen more than one time
+
+  for (var i = 0; i <= wrongLetterGuess.length - 1; i++) {
+    if (wrongLetterGuess[i].indexOf(userGuess) != -1) {
+      return false;
+    }
+  }
+
 
   for (var i = 0; i < computerWordChoiceArray.length; i++) {
     if (userGuess === computerWordChoiceArray[i]) {
